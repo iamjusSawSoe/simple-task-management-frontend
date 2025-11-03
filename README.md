@@ -1,73 +1,189 @@
-# React + TypeScript + Vite
+# Task Management App - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive React + TypeScript frontend for the Task Management application with ShadCN UI components and Tailwind CSS.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Authentication**: Login and registration with JWT
+- **Task Management**: Create, read, update, and delete tasks
+- **Dialogs**: ShadCN UI–based confirmation dialogs for deleting tasks and logging out
+- **Filtering**: Filter tasks by status, priority, and search
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **State Management**: Zustand for efficient state handling
+- **Type Safety**: Full TypeScript implementation
+- **Modern UI**: ShadCN UI components with beautiful design
 
-## React Compiler
+## 📋 Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js 16+ and npm/yarn
+- Backend API running on `http://localhost:8000`
 
-## Expanding the ESLint configuration
+## 🛠️ Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Install dependencies**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Set up environment variables**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cp .env.example .env
 ```
+
+The `.env` file should contain:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000/api/v1
+```
+
+## 🏃‍♂️ Running the Application
+
+**Development mode:**
+
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`
+
+**Build for production:**
+
+```bash
+npm run build
+```
+
+**Preview production build:**
+
+```bash
+npm run preview
+```
+
+## 📁 Project Structure
+
+```
+frontend/
+├── public/              # Static assets
+├── src/
+│   ├── components/      # React components
+│   │   ├── ui/         # UI components (Button, Input, etc.)
+│   │   ├── TaskDialog.tsx
+│   │   ├── TaskCard.tsx
+│   │   ├── TaskCardSkeleton.tsx
+│   │   ├── ConfirmLogoutDialog.tsx
+│   │   └── DeleteTaskDialog.tsx
+│   ├── pages/          # Page components
+│   │   ├── LoginPage.tsx
+│   │   ├── RegisterPage.tsx
+│   │   └── DashboardPage.tsx
+│   ├── stores/         # Zustand stores
+│   │   ├── authStore.ts
+│   │   └── taskStore.ts
+│   ├── services/       # API services
+│   │   └── api.ts
+│   ├── types/          # TypeScript types
+│   │   └── index.ts
+│   ├── lib/            # Utilities
+│   │   └── utils.ts
+│   ├── App.tsx         # Main app component
+│   ├── main.tsx        # Entry point
+│   └── index.css       # Global styles
+├── index.html
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+└── vite.config.ts
+```
+
+## 🎨 Key Technologies
+
+- **React 18**
+- **TypeScript**
+- **Vite**
+- **Tailwind CSS**
+- **ShadCN UI**
+- **Zustand**
+- **React Router**
+- **Axios**
+- **Lucide React**
+
+## 📱 Responsive Breakpoints
+
+- **Mobile**: `< 768px`
+- **Tablet**: `768px - 1024px`
+- **Desktop**: `> 1024px`
+
+## 🔑 Features Overview
+
+### Authentication
+
+- Login and register with JWT
+- Token-based authentication
+- Auto logout on token expiry
+
+### Task Management
+
+- Create, edit, and delete tasks
+- Confirmation dialogs for delete and logout
+- Filter by status, priority, and search
+- View task statistics
+
+### UI/UX Features
+
+- Modern design using ShadCN UI
+- Task cards with skeleton loading
+- Smooth animations and transitions
+- Responsive grid layout
+
+## 🧪 Testing the Application
+
+1. **Start the backend:**
+
+```bash
+uvicorn app.main:app --reload
+```
+
+2. **Start the frontend:**
+
+```bash
+npm run dev
+```
+
+3. **Open:** `http://localhost:5173`
+
+## 🔐 Security Features
+
+- JWT stored in localStorage
+- Protected routes with auth check
+- CORS configured on backend
+
+## 📝 Environment Variables
+
+| Variable            | Description          | Default                        |
+| ------------------- | -------------------- | ------------------------------ |
+| `VITE_API_BASE_URL` | Backend API base URL | `http://localhost:8000/api/v1` |
+
+## 🚀 Production Deployment
+
+1. **Build the app:**
+
+```bash
+npm run build
+```
+
+2. **Deploy `dist` folder** to Vercel, Netlify, or any static host.
+
+3. **Set environment variable:**
+
+```
+VITE_API_BASE_URL=https://your-production-api.com/api/v1
+```
+
+## 📞 Support
+
+For any issues, contact: hr@horizonlabs.ai
+
+## 📄 License
+
+This project is created for technical assessment purposes.

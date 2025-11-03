@@ -14,7 +14,7 @@ export function useResponsiveSkeletonCount() {
       }
     };
 
-    updateCount(); // run initially
+    updateCount();
     window.addEventListener("resize", updateCount);
     return () => window.removeEventListener("resize", updateCount);
   }, []);

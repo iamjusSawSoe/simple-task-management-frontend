@@ -1,4 +1,3 @@
-// api.ts - Fixed version
 import type {
   AuthResponse,
   CreateTaskData,
