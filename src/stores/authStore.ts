@@ -10,6 +10,7 @@ interface AuthState {
   error: string | null;
   login: (credentials: LoginCredentials) => Promise<void>;
   register: (data: RegisterData) => Promise<void>;
+  logout: () => void;
   clearError: () => void;
 }
 
@@ -48,6 +49,15 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({ error: errorMessage, isLoading: false });
       throw error;
     }
+  },
+
+  logout: () => {
+    localStorage.removeItem("token");
+    set({
+      user: null,
+      token: null,
+      isAuthenticated: false,
+    });
   },
 
   clearError: () => set({ error: null }),

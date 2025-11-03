@@ -14,6 +14,7 @@ import { useAuthStore } from "@/stores/authStore";
 import { UserPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -36,11 +37,13 @@ export default function RegisterPage() {
 
     if (formData.password !== formData.confirmPassword) {
       setValidationError("Passwords do not match");
+      toast.error("Passwords do not match.");
       return;
     }
 
     if (formData.password.length < 6) {
       setValidationError("Password must be at least 6 characters");
+      toast.error("Password must be at least 6 characters.");
       return;
     }
 
@@ -50,14 +53,16 @@ export default function RegisterPage() {
         username: formData.username,
         password: formData.password,
       });
+      toast.success("Account created successfully! Please log in.");
       navigate("/login");
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Register failed:", error);
+      toast.error("Failed to create account. Please try again.");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 to-indigo-100 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-center mb-4">
@@ -137,14 +142,18 @@ export default function RegisterPage() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4 mt-4">
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button
+              type="submit"
+              className="w-full cursor-pointer"
+              disabled={isLoading}
+            >
               {isLoading ? "Creating account..." : "Create account"}
             </Button>
             <p className="text-sm text-center text-muted-foreground">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="text-primary hover:underline font-medium"
+                className="text-primary hover:underline font-medium cursor-pointer"
               >
                 Sign in
               </Link>
